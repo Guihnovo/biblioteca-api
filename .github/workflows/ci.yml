@@ -23,6 +23,14 @@ jobs:
 
       - run: npm run test:unit
 
+      - name: Alerta de sucesso
+        if: success()
+        run: echo "✅ Todos os testes unitários passaram com sucesso!"
+
+      - name: Alerta de falha
+        if: failure()
+        run: echo "❌ FALHA nos testes unitários! Verifique os logs."
+
   integration-tests:
     name: Testes de Integração
     runs-on: ubuntu-latest
@@ -38,6 +46,14 @@ jobs:
       - run: npm ci
 
       - run: npm run test:integration
+
+      - name: Alerta de sucesso
+        if: success()
+        run: echo "✅ Todos os testes de integração passaram!"
+
+      - name: Alerta de falha
+        if: failure()
+        run: echo "❌ FALHA nos testes de integração! Verifique os logs."
 
   build:
     name: Build
